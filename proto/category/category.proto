@@ -1,0 +1,24 @@
+syntax="proto3";
+
+option go_package="./proto/category";
+
+package category; 
+
+message GetCategoryRequest{
+    int64 ID = 1;
+}
+
+message GetCategoryResponse{
+    int64 ID = 1;
+    string Name = 2;
+    bool Status = 3;
+    string Description = 4;
+}
+
+message GetCategoriesRequest{}
+
+service CategoryService {
+    rpc GetCategory (GetCategoryRequest) returns (GetCategoryResponse){}
+    rpc GetCategories (GetCategoriesRequest) returns (stream GetCategoryResponse){}
+    rpc GetCat (stream GetCategoriesRequest) returns (GetCategoryResponse){}
+}
